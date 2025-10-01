@@ -28,7 +28,4 @@ public class Customer {
 
     private String channel;
 
-    public void updateEmail(String newEmail) {
-        this.email = newEmail;
-    }
 }
