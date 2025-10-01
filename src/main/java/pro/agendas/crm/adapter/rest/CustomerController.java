@@ -1,10 +1,12 @@
 package pro.agendas.crm.adapter.rest;
 
-import pro.agendas.crm.application.CustomerUseCase;
-import pro.agendas.crm.adapter.mapper.CustomerMapper;
-import pro.agendas.crm.domain.model.Customer;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pro.agendas.crm.adapter.mapper.CustomerMapper;
+import pro.agendas.crm.application.CustomerUseCase;
+import pro.agendas.crm.domain.model.Customer;
 
 @RestController
 @RequestMapping("/customers")
@@ -19,10 +21,12 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<String> create(@RequestBody CustomerDTO dto) {
+    public ResponseEntity<CustomerDTO> create(@Valid @RequestBody CustomerDTO dto) {
         Customer customer = mapper.toEntity(dto);
-        useCase.createCustomer(customer);
-        return ResponseEntity.ok("Customer created");
+        Customer createdCustomer = useCase.createCustomer(customer);
+        CustomerDTO createdDto = mapper.toDTO(createdCustomer);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDto);
     }
 
     @GetMapping("/{id}")

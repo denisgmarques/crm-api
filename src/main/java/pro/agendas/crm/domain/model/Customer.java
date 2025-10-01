@@ -28,19 +28,7 @@ public class Customer {
 
     private String channel;
 
-    public void validate() {
-        if (name == null || name.isBlank())
-            throw new IllegalArgumentException("Name is required");
-
-        if (email == null || !email.contains("@"))
-            throw new IllegalArgumentException("Invalid email");
-
-        // Aqui você pode adicionar outras validações relevantes
-    }
-
     public void updateEmail(String newEmail) {
-        if (newEmail == null || !newEmail.contains("@"))
-            throw new IllegalArgumentException("Invalid email");
         this.email = newEmail;
     }
 }

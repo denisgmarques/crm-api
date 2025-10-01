@@ -4,7 +4,7 @@ import pro.agendas.crm.domain.model.Customer;
 import java.util.Optional;
 
 public interface CustomerRepository {
-    void save(Customer customer);
+    Customer save(Customer customer);
     Optional<Customer> findById(String id);
 }
 
